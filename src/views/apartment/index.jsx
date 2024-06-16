@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter, faChartSimple, faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import Image from 'react-bootstrap/Image';
 import { Link } from "react-router-dom";
-import Checkout from "../checkout/checkout";
+
 function Apartment() {
   const { apartment } = useLoaderData();
 

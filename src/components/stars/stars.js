@@ -6,7 +6,7 @@ function Stars({ratio}){
 
     const stars = [];
 
-    for (let i = 0; i!=5; i++){
+    for (let i = 0; i!==5; i++){
         let staricon;
         const starvalue=ratio-i;
         if(0.5<=starvalue && starvalue<1){

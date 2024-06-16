@@ -5,10 +5,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import DefaultLayout from './layouts/default';
 import router from './routes';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
