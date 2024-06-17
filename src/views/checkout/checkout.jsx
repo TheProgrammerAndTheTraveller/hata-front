@@ -1,10 +1,16 @@
 // Ваш файл checkout.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { Container } from 'react-bootstrap';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
+
 
 function Checkout() {
+  const [startDate, setStartDate] = useState(new Date());
+
+
   return (
     <Container>
      <h1>Бронь</h1>
@@ -15,8 +21,8 @@ function Checkout() {
       className="mb-3"
       justify
     >
-      <Tab eventKey="home" title="Даты">
-        Tab content for Home
+      <Tab eventKey="home" title="Даты" active="true">
+        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
       </Tab>
       <Tab eventKey="profile" title="Оплата">
         Tab content for Profile

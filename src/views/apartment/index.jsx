@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter, faChartSimple, faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import Image from 'react-bootstrap/Image';
 import { Link } from "react-router-dom";
-import Checkout from "../checkout/checkout";
+
 function Apartment() {
   const { apartment } = useLoaderData();
 
@@ -49,7 +49,7 @@ function Apartment() {
         </Col>
         <Col>
           <div className="map-container">
-            <APIProvider apiKey={''}>
+            <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
               <Map
                 defaultZoom={13}
                 defaultCenter={{ lat: apartment.location[0], lng: apartment.location[1] }}

@@ -4,7 +4,6 @@ import ApartmentCard from "../../components/apartment-card";
 import apartmentcards from "../../data/apartmentcards";
 import "./profile.css";
 
-
 function Profile() {
     const apartment = apartmentcards[0];
 
