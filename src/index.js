@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import DefaultLayout from './layouts/default';
 import router from './routes';
 import {
-  
+
   RouterProvider,
 } from "react-router-dom";
 
@@ -14,9 +14,9 @@ import {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-      <DefaultLayout>
-        <RouterProvider router={router} />
-      </DefaultLayout>
+    <DefaultLayout>
+      <RouterProvider router={router} />
+    </DefaultLayout>
   </React.StrictMode>
 );
 

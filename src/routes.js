@@ -5,6 +5,7 @@ import { apartmentloader } from "./data-loaders/apartment-loader";
 import Profile from "./views/profile/profile";
 import Checkout from "./views/checkout/checkout";
 import Login from "./views/login";
+import Registration from "./views/registration/registration";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path:"/login",
     element: <Login />,
+  },
+  {
+    path:"/registration",
+    element: <Registration />
   }
 ]);
 

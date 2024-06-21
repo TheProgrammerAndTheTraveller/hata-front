@@ -1,37 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useState } from 'react';
 import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from 'react-router-dom';
+import { login } from '../../apiServices/authService';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError(null);
 
-
-    // ВОТ ЭТУ ХУЙНЮ В ОТДЕЛЬНЫЙ ФАЙЛ В apiServices/authService
     try {
-      const response = await fetch('https://localhost:7172/api/auth/login', { // http://localhost:5081 => в энвы. 
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email, password })
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Something went wrong');
-      }
-
-      const data = await response.json();
+      const data = await login(email, password);
       console.log('Login successful', data);
       // Handle successful login (e.g., save token, redirect)
+      navigate('/'); // Redirect to the main page
     } catch (err) {
-      setError(err.message);
+      setError('Данного пользователя не существует'); // Set the error message
     }
   };
 
@@ -73,7 +63,7 @@ const LoginPage = () => {
               </Form>
               <div className="mt-3 text-center">
                 <span>У вас еще нет аккаунта? </span>
-                <a href="/register">Зарегистрируйтесь прямо сейчас</a>
+                <a href="/registration">Зарегистрируйтесь прямо сейчас</a>
               </div>
             </Card.Body>
           </Card>
