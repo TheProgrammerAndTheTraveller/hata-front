@@ -1,6 +1,11 @@
-import apartmentcards from "../data/apartmentcards";
+import { getPropertyById } from '../apiServices/propertyService';
 
-export function apartmentloader({ params }) {
-    const apartment = apartmentcards[params.id-1];
-    return { apartment };
+export async function apartmentloader({ params }) {
+    try {
+        const apartment = await getPropertyById(params.id);
+        return { apartment };
+    } catch (error) {
+        console.error('Failed to load apartment:', error);
+        throw error;
+    }
 }

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const ApartmentCard = ({ id, image, title, price }) => {
   return (
     <Card style={{ width: '18rem', textDecoration: 'none' }} as={Link} to={`/apartments/${id}`} >
-      <Card.Img variant="top" src={image[0]} />
+      <Card.Img variant="top" src={`data:image/jpeg;base64,${image}`} />
       <Card.Header>
         <Stack direction="horizontal" gap={2}>
           <Badge pill bg="primary" text="light">
@@ -20,7 +20,7 @@ const ApartmentCard = ({ id, image, title, price }) => {
         <Card.Title>{title}</Card.Title>
         <Card.Subtitle>Залупа в пизде города</Card.Subtitle>
         <Card.Text>
-          <strong>{price}</strong> за месяц
+          <strong>{price} &#8376;</strong> за месяц
         </Card.Text>
       </Card.Body>
     </Card>
