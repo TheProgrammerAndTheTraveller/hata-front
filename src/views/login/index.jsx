@@ -1,5 +1,5 @@
-import React from 'react';
-import { useState } from 'react';
+// src/pages/login.jsx
+import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +18,7 @@ const LoginPage = () => {
     try {
       const data = await login(email, password);
       console.log('Login successful', data);
-      // Handle successful login (e.g., save token, redirect)
+      localStorage.setItem('token', data.token);
       navigate('/'); // Redirect to the main page
     } catch (err) {
       setError('Данного пользователя не существует'); // Set the error message

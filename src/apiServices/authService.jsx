@@ -1,5 +1,6 @@
+const AUTH_API_URL = process.env.REACT_APP_AUTH_API_URL;
 export const login = async (email, password) => {
-  const response = await fetch('http://localhost:5081/api/auth/login', {
+  const response = await fetch(`${AUTH_API_URL}/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -17,7 +18,7 @@ export const login = async (email, password) => {
 
 export const register = async (userData) => {
 
-  const response = await fetch('http://localhost:5081/api/auth/register', {
+  const response = await fetch(`${AUTH_API_URL}/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

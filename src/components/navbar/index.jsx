@@ -23,7 +23,7 @@ function HataNavbar() {
             <Nav.Link href="/profile">Профиль</Nav.Link>
           </Nav>
         </Navbar.Collapse>
-        <Form inline>
+        <Form inline="true">
         <Row>
           <Col xs="auto">
             <Form.Control

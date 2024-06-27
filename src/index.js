@@ -1,3 +1,4 @@
+// src/index.jsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -6,17 +7,18 @@ import reportWebVitals from './reportWebVitals';
 import DefaultLayout from './layouts/default';
 import router from './routes';
 import {
-
   RouterProvider,
 } from "react-router-dom";
-
+import { ProfileProvider } from './contexts/ProfileContext';  // Импортируем ProfileProvider
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <DefaultLayout>
-      <RouterProvider router={router} />
-    </DefaultLayout>
+    <ProfileProvider>  {/* Оборачиваем DefaultLayout в ProfileProvider */}
+      <DefaultLayout>
+        <RouterProvider router={router} />
+      </DefaultLayout>
+    </ProfileProvider>
   </React.StrictMode>
 );
 

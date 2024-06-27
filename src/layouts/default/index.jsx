@@ -7,29 +7,7 @@ import HataNavbar from "../../components/navbar";
 
 function DefaultLayout({ children }) {
 
-   const [user, setUser] = useState()
-
-  // useEffect(() => {
-  //   // declare the data fetching function
-  //   const fetchData = async () => { 
-      
-  //     OpenAPI.BASE = "http://localhost:5081"
-
-
-  //     return await apiAuthLoginPost({
-  //     body: {
-  //       email: "hueta@pizdec.ru",
-  //       password: "12345"
-  //     }
-  //   })}
-  
-  //   // call the function
-  //   fetchData()
-  //     .then(result => setUser(JSON.stringify(result)))
-  //     // make sure to catch any error
-  //     .catch(console.error);
-  // }, [])
-
+  const [user, setUser] = useState()
 
   return (
     <Container fluid={true}>

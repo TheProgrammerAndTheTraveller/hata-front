@@ -1,4 +1,4 @@
-const API_URL = 'https://localhost:7127/api/Property';
+const API_URL = process.env.REACT_APP_API_URL;
 
 export const getProperties = async () => {
   const response = await fetch(API_URL, {
@@ -9,7 +9,7 @@ export const getProperties = async () => {
   });
 
   if (!response.ok) {
-    const errorData = await response.
+    const errorData = await response.json();
     throw new Error(errorData.message || 'Something went wrong');
   }
 
