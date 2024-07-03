@@ -22,8 +22,9 @@ const router = createBrowserRouter([
     element: <Profile />
   },
   {
-    path: "/checkout",
-  element: <Checkout />,
+    path: "/checkout/:id",
+    element: <Checkout />,
+    loader: apartmentloader,
   },
   {
     path:"/login",
