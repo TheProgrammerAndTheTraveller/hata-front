@@ -3,18 +3,21 @@ import { Container } from "react-bootstrap";
 import HataNavbar from "../../components/navbar";
 //import { apiAuthLoginPost } from "../../openapi/authservice";
 //import {  } from "openapi";
-
+import Footer from "../../components/footer";
 
 function DefaultLayout({ children }) {
 
   const [user, setUser] = useState()
 
   return (
-    <Container fluid={true}>
+    <>
       <HataNavbar />
-      {user}
-      {Children.map(children, child => <>{child}</>)}
-    </Container>)
+      <Container fluid={true} className="main-container">
+        {Children.map(children, child => <>{child}</>)}
+      </Container>
+      <Footer />
+    </>
+    )
 }
 
 export default DefaultLayout;

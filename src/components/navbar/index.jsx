@@ -11,7 +11,7 @@ import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
 function HataNavbar() {
   return (
-    <Navbar expand="lg" className="bg-body-tertiary justify-content-between">
+    <Navbar expand="lg" className="bg-body-tertiary justify-content-between main-nav">
       <Container>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
