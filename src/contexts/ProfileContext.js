@@ -19,6 +19,7 @@ export const ProfileProvider = ({ children }) => {
     const token = localStorage.getItem('token');
 
     if (!token) {
+      console.log("no token found")
       setError('No token found');
       return;
     }
@@ -27,8 +28,9 @@ export const ProfileProvider = ({ children }) => {
       try {
         setLoading(true);
         const profileData = await getProfile(token);
-        setProfile(profileData);
-        localStorage.setItem('profile', JSON.stringify(profileData));
+        const profileWithToken = {...profileData, token}
+        setProfile(profileWithToken);
+        localStorage.setItem('profile', JSON.stringify(profileWithToken));
       } catch (err) {
         setError(err.message);
       } finally {
