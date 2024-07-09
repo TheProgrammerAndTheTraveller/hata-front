@@ -21,6 +21,7 @@ function HataNavbar() {
             <Nav.Link href="/search">Поиск</Nav.Link>
             <Nav.Link href="/wishlist">Избранное</Nav.Link>
             <Nav.Link href="/profile">Профиль</Nav.Link>
+            <Nav.Link href="/rent" className="text-primary">Сдать квартиру</Nav.Link>
           </Nav>
         </Navbar.Collapse>
         <Form inline="true">

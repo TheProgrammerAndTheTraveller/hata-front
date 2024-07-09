@@ -6,6 +6,7 @@ import Profile from "./views/profile/profile";
 import Checkout from "./views/checkout/checkout";
 import Login from "./views/login";
 import Registration from "./views/registration/registration";
+import Rent from "./views/rent/rent";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
   {
     path:"/registration",
     element: <Registration />
+  },
+  {
+    path:"/rent",
+    element: <Rent />
   }
 ]);
 

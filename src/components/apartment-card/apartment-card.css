@@ -11,9 +11,11 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   }
   
-  .apartment-card img {
+  .apartment-img {
     width: 100%;
-    height: auto;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
   }
   
   .apartment-card .card-header {

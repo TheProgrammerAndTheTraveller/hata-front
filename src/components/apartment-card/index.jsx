@@ -1,11 +1,12 @@
 import React from 'react';
 import { Badge, Card, Stack } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import './apartment-card.css'
 
 const ApartmentCard = ({ id, image, title, price }) => {
   return (
     <Card style={{ width: '18rem', textDecoration: 'none' }} as={Link} to={`/apartments/${id}`} >
-      <Card.Img variant="top" src={`data:image/jpeg;base64,${image}`} />
+      <Card.Img variant="top" className='apartment-img' src={`data:image/jpeg;base64,${image}`} />
       <Card.Header>
         <Stack direction="horizontal" gap={2}>
           <Badge pill bg="primary" text="light">

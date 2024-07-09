@@ -31,3 +31,20 @@ export const getPropertyById = async (id) => {
 
   return response.json();
 };
+export const addProperty = async (propertyData) => {
+  const token = localStorage.getItem('token');
+  const response = await fetch(`${API_URL}`, {
+      method: 'POST',
+      headers: {
+          'Authorization': `Bearer ${token}`
+      },
+      body: propertyData
+  });
+
+  if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Something went wrong');
+  }
+
+  return response.json();
+};
