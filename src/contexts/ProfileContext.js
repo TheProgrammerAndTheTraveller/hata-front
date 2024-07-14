@@ -15,7 +15,7 @@ export const ProfileProvider = ({ children }) => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem('token'));
   const navigate = useNavigate();
 
   const fetchProfile = async (token) => {
@@ -25,6 +25,7 @@ export const ProfileProvider = ({ children }) => {
       const profileWithToken = {...profileData, token}
       setProfile(profileWithToken);
       localStorage.setItem('profile', JSON.stringify(profileWithToken));
+      return profileWithToken;
     } catch (err) {
       setError(err.message);
     } finally {
@@ -34,9 +35,6 @@ export const ProfileProvider = ({ children }) => {
 
   const getToken = () => {
     if (!token)
-      setToken(localStorage.getItem('token'));
-
-    if (!token)
       navigate("/login");
 
     return token;
@@ -45,11 +43,10 @@ export const ProfileProvider = ({ children }) => {
   const getProfile = async () => {
     if (profile)
       return profile;
-
+    
     const token = getToken();
 
-    await fetchProfile(token);
-    return profile;
+    return await fetchProfile(token);
   }
 
   return (

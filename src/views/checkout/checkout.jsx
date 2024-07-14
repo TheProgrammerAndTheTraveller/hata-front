@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import bookingService from '../../apiServices/bookingService';
+import { useProfile } from '../../contexts/ProfileContext'; // Импорт контекста профиля
 
 function Checkout() {
   const [startDate, setStartDate] = useState(new Date());
@@ -13,11 +14,11 @@ function Checkout() {
   const navigate = useNavigate();
 
   const { apartment } = useLoaderData();
-
+  const { getToken } = useProfile()
   const handleBooking = async () => {
 
     // БРАТЬ ИЗ КОНТЕКСТА метод getToken(), ошибку не обрабатывать
-    const token = localStorage.getItem('token');
+    const token = getToken()
     if (!token) {
       setError('User is not authenticated');
       return;

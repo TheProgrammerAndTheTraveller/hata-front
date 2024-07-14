@@ -35,7 +35,7 @@ export const getPropertyById = async (id, token) => {
 };
 
 export const addProperty = async (propertyData, token) => {
-  const response = await fetch(`${API_URL}/api/Property`, {
+  const response = await fetch(`${API_URL}`, {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${token}`
