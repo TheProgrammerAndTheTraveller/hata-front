@@ -1,8 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import { addProperty } from '../../apiServices/propertyService';
+import { useProfile } from '../../contexts/ProfileContext';
 
 function Rent() {
+    const navigate = useNavigate();
+    const { getToken } = useProfile();
+    const token = getToken();
+
+    
+
     const [formData, setFormData] = useState({
         address: '',
         description: '',
@@ -37,11 +45,10 @@ function Rent() {
         const data = new FormData(e.target);
 
         try {
-            await addProperty(data);
+            await addProperty(data, token);
             alert('Property added successfully');
         } catch (error) {
-            console.error('There was an error adding the property!', error);
-            alert('There was an error adding the property!');
+            alert(`Failed to add property: ${error.message}`);
         }
     };
 

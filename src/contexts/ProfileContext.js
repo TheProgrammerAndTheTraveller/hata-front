@@ -1,6 +1,7 @@
 // src/contexts/ProfileContext.js
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { getProfile } from '../apiServices/profileService';
+import { getProfile as getProfileFromApi } from '../apiServices/profileService';
+import { useNavigate } from 'react-router-dom';
 
 const ProfileContext = createContext();
 
@@ -14,37 +15,45 @@ export const ProfileProvider = ({ children }) => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [token, setToken] = useState(null);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-
-    if (!token) {
-      console.log("no token found")
-      setError('No token found');
-      return;
+  const fetchProfile = async (token) => {
+    try {
+      setLoading(true);
+      const profileData = await getProfileFromApi(token);
+      const profileWithToken = {...profileData, token}
+      setProfile(profileWithToken);
+      localStorage.setItem('profile', JSON.stringify(profileWithToken));
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    const fetchProfile = async () => {
-      try {
-        setLoading(true);
-        const profileData = await getProfile(token);
-        const profileWithToken = {...profileData, token}
-        setProfile(profileWithToken);
-        localStorage.setItem('profile', JSON.stringify(profileWithToken));
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const getToken = () => {
+    if (!token)
+      setToken(localStorage.getItem('token'));
 
-    if (!profile) {
-      fetchProfile();
-    }
-  }, [profile]);
+    if (!token)
+      navigate("/login");
+
+    return token;
+  }
+
+  const getProfile = async () => {
+    if (profile)
+      return profile;
+
+    const token = getToken();
+
+    await fetchProfile(token);
+    return profile;
+  }
 
   return (
-    <ProfileContext.Provider value={{ profile, loading, error }}>
+    <ProfileContext.Provider value={{ getProfile, getToken, loading, error }}>
       {children}
     </ProfileContext.Provider>
   );

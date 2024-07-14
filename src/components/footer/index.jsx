@@ -8,9 +8,9 @@ function Footer(){
           <Col md="12" className="text-center">
             <p>&copy; MachHataHouze.</p>
             <p>Наш девиз: Через жопу и на отъебись. Дайте нам денег, пожалуйста</p>
-            <p>זין</p>
+            <p>‎זין לתחת</p>
           </Col>
-        </Row>
+        </Row>     
       </Container>
     </footer>
     );

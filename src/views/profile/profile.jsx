@@ -1,22 +1,22 @@
-
 import React, { useState, useEffect } from 'react';
 import { Image, Row, Col, Container, Accordion } from 'react-bootstrap';
 import { useProfile } from '../../contexts/ProfileContext';
 import { getCurrentBooking, getPropertyById } from '../../apiServices/profileService';
 import ApartmentCard from '../../components/apartment-card';
-import { useNavigate } from 'react-router-dom';
 import './profile.css';
 
 function Profile() {
-  const { profile, loading, error } = useProfile();
-  const token = profile?.token;
+  const { getToken, getProfile, loading, error } = useProfile();
+  const token = getToken(); // ИСПОЛЬЗОВАТЬ ВЕЗДЕ В КОМПОНЕНТАХ ВМЕСТО ПОЛУЧЕНИЯ ТОКЕНА ИЗ localStorage. И передавать через параметры в сервис.
+
   const [currentApartment, setCurrentApartment] = useState(null);
-  const navigate = useNavigate();
+  const [profile, setProfile] = useState(null);
 
   useEffect(() => {
+    const fetchProfile = async () => {
+      setProfile(await getProfile());
+    }
     const fetchCurrentApartment = async () => {
-      if (token == null)
-        return;
       try {
         const booking = await getCurrentBooking(token);
         if (booking) {
@@ -29,12 +29,8 @@ function Profile() {
     };
 
     fetchCurrentApartment();
+    fetchProfile();
   }, []);
-
-  if (error) {
-    navigate('/login');
-    return;
-  }
 
   if (loading || !profile) return <p>Loading...</p>;
 

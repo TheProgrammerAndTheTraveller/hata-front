@@ -15,6 +15,8 @@ function Checkout() {
   const { apartment } = useLoaderData();
 
   const handleBooking = async () => {
+
+    // БРАТЬ ИЗ КОНТЕКСТА метод getToken(), ошибку не обрабатывать
     const token = localStorage.getItem('token');
     if (!token) {
       setError('User is not authenticated');

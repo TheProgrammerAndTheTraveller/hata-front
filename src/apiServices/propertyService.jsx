@@ -4,11 +4,12 @@ export const getProperties = async () => {
   const response = await fetch(API_URL, {
     method: 'GET',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
   });
 
   if (!response.ok) {
+    
     const errorData = await response.json();
     throw new Error(errorData.message || 'Something went wrong');
   }
@@ -16,11 +17,12 @@ export const getProperties = async () => {
   return response.json();
 };
 
-export const getPropertyById = async (id) => {
+export const getPropertyById = async (id, token) => {
   const response = await fetch(`${API_URL}/${id}`, {
     method: 'GET',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
     },
   });
 
@@ -31,20 +33,19 @@ export const getPropertyById = async (id) => {
 
   return response.json();
 };
-export const addProperty = async (propertyData) => {
-  const token = localStorage.getItem('token');
-  const response = await fetch(`${API_URL}`, {
-      method: 'POST',
-      headers: {
-          'Authorization': `Bearer ${token}`
-      },
-      body: propertyData
+
+export const addProperty = async (propertyData, token) => {
+  const response = await fetch(`${API_URL}/api/Property`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    },
+    body: propertyData
   });
 
   if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Something went wrong');
+    const errorData = await response.text();
+    throw new Error(errorData.message || 'Something went wrong');
   }
-
   return response.json();
 };

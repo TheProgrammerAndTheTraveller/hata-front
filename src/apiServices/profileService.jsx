@@ -25,7 +25,6 @@ export const getProfile = async (token) => {
 // profileService.jsx
 
 // profileService.jsx
-
 const API_URL = process.env.REACT_APP_PROFILE_API_URL; // URL API профиля
 const BOOKING_API_URL = process.env.REACT_APP_BOOKING_API_URL; // URL API бронирования
 const PROPERTY_API_URL = process.env.REACT_APP_API_URL; // URL API квартир
@@ -41,7 +40,8 @@ export const getProfile = async (token) => {
     });
 
     if (!response.ok) {
-      const errorData = await response.json();
+      const errorData = await response.text();
+      
       throw new Error(errorData.message || 'Something went wrong');
     }
 
@@ -63,7 +63,9 @@ export const getCurrentBooking = async (token) => {
     });
 
     if (!response.ok) {
-      const errorData = await response.json();
+      
+      const errorData = await response.text();
+      
       throw new Error(errorData.message || 'Something went wrong');
     }
 
@@ -86,7 +88,8 @@ export const getPropertyById = async (propertyId, token) => {
     });
 
     if (!response.ok) {
-      const errorData = await response.json();
+      const errorData = await response.text();
+     
       throw new Error(errorData.message || 'Something went wrong');
     }
 
