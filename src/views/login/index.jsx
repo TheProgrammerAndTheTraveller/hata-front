@@ -4,12 +4,14 @@ import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../apiServices/authService';
+import { useProfile } from '../../contexts/ProfileContext';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { updateToken } = useProfile();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -18,7 +20,7 @@ const LoginPage = () => {
     try {
       const data = await login(email, password);
       console.log('Login successful', data);
-      localStorage.setItem('token', data.token);
+      await updateToken(data.token);
       navigate('/'); // Redirect to the main page
     } catch (err) {
       setError('Данного пользователя не существует'); // Set the error message

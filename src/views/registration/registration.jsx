@@ -9,15 +9,35 @@ const Registration = () => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [profilePicture, setProfilePicture] = useState(null);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setProfilePicture(reader.result); // result is base64 encoded string
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleRegister = async (e) => {
     e.preventDefault();
     setError(null);
 
+    const userData = {
+      firstName,
+      lastName,
+      email,
+      password,
+      profilePicture
+    };
+
     try {
-      const data = await register({ firstName, lastName, email, password });
+      const data = await register(userData);
       console.log('Registration successful', data);
       navigate('/login');
     } catch (err) {
@@ -75,6 +95,14 @@ const Registration = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="formProfilePicture" className="mt-3">
+                  <Form.Label>Фотография профиля</Form.Label>
+                  <Form.Control
+                    type="file"
+                    onChange={handleFileChange}
                   />
                 </Form.Group>
 

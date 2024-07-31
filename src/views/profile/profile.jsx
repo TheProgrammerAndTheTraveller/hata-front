@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Image, Row, Col, Container, Accordion } from 'react-bootstrap';
+import { Image, Row, Col, Container, Accordion, Form, Button } from 'react-bootstrap';
 import { useProfile } from '../../contexts/ProfileContext';
 import { getCurrentBooking, getPropertyById } from '../../apiServices/profileService';
 import ApartmentCard from '../../components/apartment-card';
 import './profile.css';
 
 function Profile() {
-  const { getToken, getProfile, loading, error } = useProfile();
-  const token = getToken(); // ИСПОЛЬЗОВАТЬ ВЕЗДЕ В КОМПОНЕНТАХ ВМЕСТО ПОЛУЧЕНИЯ ТОКЕНА ИЗ localStorage. И передавать через параметры в сервис.
+  const { getToken, getProfile, updateProfilePicture, loading, error } = useProfile();
+  const token = getToken();
 
   const [currentApartment, setCurrentApartment] = useState(null);
   const [profile, setProfile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
 
   useEffect(() => {
     const fetchProfile = async () => {
       setProfile(await getProfile());
     }
+
     const fetchCurrentApartment = async () => {
       try {
         const booking = await getCurrentBooking(token);
@@ -30,7 +32,18 @@ function Profile() {
 
     fetchCurrentApartment();
     fetchProfile();
-  }, []);
+  }, [getProfile, token]);
+
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
+
+  const handleProfilePictureUpdate = async () => {
+    if (selectedFile) {
+      await updateProfilePicture(profile.userId, selectedFile);
+      setProfile(await getProfile()); 
+    }
+  };
 
   if (loading || !profile) return <p>Loading...</p>;
 
@@ -82,7 +95,17 @@ function Profile() {
           </Accordion.Item>
           <Accordion.Item eventKey="2">
             <Accordion.Header>Настройки профиля</Accordion.Header>
-            <Accordion.Body>Профиль как профиль, пойдет</Accordion.Body>
+            <Accordion.Body>
+              <Form>
+                <Form.Group controlId="formFile">
+                  <Form.Label>Изменить аватар</Form.Label>
+                  <Form.Control type="file" onChange={handleFileChange} />
+                </Form.Group>
+                <Button variant="primary" className="mt-3" onClick={handleProfilePictureUpdate}>
+                  Обновить аватар
+                </Button>
+              </Form>
+            </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="3">
             <Accordion.Header>Договоры/Чеки</Accordion.Header>

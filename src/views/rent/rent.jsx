@@ -7,12 +7,11 @@ import { useNavigate } from 'react-router-dom';
 function Rent() {
     const { getToken } = useProfile();
     const navigate = useNavigate();
-
-    let token = null;
+    const [token, setToken] = useState()
 
     useEffect(() => {
-        token = getToken();
-    })
+        setToken(getToken());
+    },[getToken])
 
     const [formData, setFormData] = useState({
         address: '',
@@ -51,7 +50,7 @@ function Rent() {
             await addProperty(data, token);
             alert('Property added successfully');
             navigate("/");
-            
+
         } catch (error) {
             alert(`Failed to add property: ${error.message}`);
         }
@@ -73,7 +72,8 @@ function Rent() {
                 <Form.Group controlId="description">
                     <Form.Label>Описание</Form.Label>
                     <Form.Control
-                        type="text"
+                        as="textarea" 
+                        rows={3} 
                         name="description"
                         value={formData.description}
                         onChange={handleChange}
@@ -100,11 +100,16 @@ function Rent() {
                 <Form.Group controlId="propertyType">
                     <Form.Label>Тип недвижимости</Form.Label>
                     <Form.Control
-                        type="text"
+                        as="select"
                         name="propertyType"
                         value={formData.propertyType}
                         onChange={handleChange}
-                    />
+                    >
+                        <option value="house">Дом</option>
+                        <option value="appartment">Квартира</option>
+                        <option value="room">Комната</option>
+                        <option value="dogHouse">Конура</option>
+                    </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="internet">
                     <Form.Label>Есть интернет?</Form.Label>

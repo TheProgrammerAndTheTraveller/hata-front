@@ -4,6 +4,7 @@ const API_URL = process.env.REACT_APP_BOOKING_API_URL;
 
 const createBooking = async (bookingDto, token) => {
   try {
+    debugger
     const response = await fetch(API_URL, {
       method: 'POST',
       headers: {

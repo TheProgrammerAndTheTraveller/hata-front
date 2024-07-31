@@ -6,7 +6,7 @@ function Footer(){
       <Container>
         <Row>
           <Col md="12" className="text-center">
-            <p>&copy; MachHataHouze.</p>
+            <p>&copy; MachoHataHouze.</p>
             <p>Наш девиз: Через жопу и на отъебись. Дайте нам денег, пожалуйста</p>
             <p>‎זין לתחת</p>
           </Col>

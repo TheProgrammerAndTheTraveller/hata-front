@@ -17,12 +17,11 @@ export const getProperties = async () => {
   return response.json();
 };
 
-export const getPropertyById = async (id, token) => {
+export const getPropertyById = async (id) => {
   const response = await fetch(`${API_URL}/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
     },
   });
 
